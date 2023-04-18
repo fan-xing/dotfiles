@@ -2,11 +2,12 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
-        priority = 1000, -- make sure to load this before all the other start plugins
     },
     {
         'sainnhe/gruvbox-material',
-        priority = 1000, -- make sure to load this before all the other start plugins
+    },
+    {
+        'folke/tokyonight.nvim'
     },
     "nvim-lua/plenary.nvim",
     {
@@ -17,9 +18,13 @@ return {
         },
     },
     "ahmedkhalf/project.nvim",
-    "rcarriga/nvim-notify",
-    "folke/noice.nvim",
-    "MunifTanjim/nui.nvim",
+    {
+        "folke/noice.nvim",
+        dependencies = {
+            "rcarriga/nvim-notify",
+            "MunifTanjim/nui.nvim",
+        }
+    },
     "neovim/nvim-lspconfig",
     {
         "ray-x/guihua.lua",
@@ -56,6 +61,7 @@ return {
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "saadparwaiz1/cmp_luasnip",
+            "lukas-reineke/cmp-under-comparator",
         },
     },
     {
@@ -121,5 +127,5 @@ return {
         'Wansmer/treesj',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
     },
-    "lukas-reineke/cmp-under-comparator"
+    "folke/which-key.nvim",
 }
