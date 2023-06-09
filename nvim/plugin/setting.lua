@@ -29,9 +29,6 @@ set binary
 "搜索高亮
 set hlsearch
 
-" 禁止折行
-"set nowrap
-
 "语法高亮
 syntax on
 set redrawtime=10000
@@ -74,7 +71,7 @@ set encoding=UTF-8
 " 设置当文件被改动时自动载入
 set autoread
 
-set completeopt=menu,menuone,noselect
+set completeopt=menu,menuone,noselect,noinsert
 
 let g:netrw_browse_split = 3
 
@@ -82,4 +79,6 @@ let g:netrw_browse_split = 3
 set updatetime=200
 
 set laststatus=3
+
+set splitkeep = "screen"
 ]])

@@ -5,23 +5,12 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 local cmp = require("cmp")
-local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 -- Global setup.
 cmp.setup({
-    formatting = {
-        format = lspkind.cmp_format({
-            mode = 'symbol_text', -- show only symbol annotations
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-
-            -- The function below will be called before any actual modifications from lspkind
-            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-            before = function(entry, vim_item)
-                return vim_item
-            end
-        })
+    completion = {
     },
+    formatting = {},
     snippet = {
         expand = function(args)
             -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
@@ -31,8 +20,8 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
-        ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+        ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s", "c" }),
+        ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s", "c" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -45,7 +34,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, { "i", "s", "c" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -54,10 +43,10 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s" }),
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs( -4), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-        ["<C-g>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        end, { "i", "s", "c" }),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs( -4), { "i", "s", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "s", "c" }),
+        ["<C-g>"] = cmp.mapping(cmp.mapping.complete(), { "i", "s", "c" }),
         ["<C-e>"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
@@ -67,26 +56,24 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
-        { name = "nvim_lsp" },
+        { name = "nvim_lsp",group_index = 1},
         -- { name = 'vsnip' }, -- For vsnip users.
         { name = "luasnip" }, -- For luasnip users.
         -- { name = 'snippy' }, -- For snippy users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         { name = "path" },
-        { name = "nvim_lsp_signature_help" },
-        -- { name = 'buffer' },
+        { name = 'buffer',group_index = 2},
     }),
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
-        side_padding = 2,
+        side_padding = 1,
     },
     sorting = {
         comparators = {
             cmp.config.compare.offset,
             cmp.config.compare.exact,
             cmp.config.compare.score,
-            require "cmp-under-comparator".under,
             cmp.config.compare.kind,
             cmp.config.compare.sort_text,
             cmp.config.compare.length,
@@ -109,31 +96,11 @@ cmp.setup.cmdline("/", {
 -- `:` cmdline setup.
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
+    sources = {
         { name = "path" },
-    }, {
         { name = "cmdline" },
-    }),
+    },
 })
 
 --luasnippets
 require("luasnip.loaders.from_vscode").lazy_load()
-
---lspkind
-require("lspkind").init({
-    -- DEPRECATED (use mode instead): enables text annotations
-    --
-    -- default: true
-    --with_text = true,
-
-    -- defines how annotations are shown
-    -- default: symbol
-    -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-    mode = "symbol_text",
-    -- default symbol map
-    -- can be either 'default' (requires nerd-fonts font) or
-    -- 'codicons' for codicon preset (requires vscode-codicons font)
-    --
-    -- default: 'default'
-    preset = "default",
-})

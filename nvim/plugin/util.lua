@@ -6,17 +6,9 @@ require("neogen").setup({
     snippet_engine = "luasnip",
 })
 
---colorizer
-require("colorizer").setup()
-
 --translator 翻译
 vim.api.nvim_command("let g:translator_default_engines = ['bing','google']")
 --vim.api.nvim_command("let g:translator_proxy_url = 'socks5://127.0.0.1:1086'")
-
--- glow markown
-require("glow").setup({
-    -- your override config
-})
 
 -- nvim-tree
 local function tree_on_attach(bufnr)
@@ -31,17 +23,13 @@ end
 require("nvim-tree").setup({
     on_attach = tree_on_attach,
     view = {
-        adaptive_size = false,
         width = "25%",
-        hide_root_folder = false,
-        side = "left",
-        preserve_window_proportions = true,
-        number = false,
-        relativenumber = false,
-        signcolumn = "yes",
     },
     filters = {
         dotfiles = true,
+    },
+    modified = {
+        enable = true,
     },
 })
 
@@ -80,7 +68,7 @@ for _, ls in ipairs(language_servers) do
 end
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
-    local suffix = (" 祉%d "):format(endLnum - lnum)
+    local suffix = (" 祉折叠%d行 "):format(endLnum - lnum)
     local sufWidth = vim.fn.strdisplaywidth(suffix)
     local targetWidth = width - sufWidth
     local curWidth = 0
@@ -181,4 +169,12 @@ require("which-key").setup({
 
         border = "single", -- none, single, double, shadow
     },
+})
+require("todo-comments").setup({
+    signs = false, -- show icons in the signs column
+    highlight = {
+        multiline = false,
+        keyword = "bg",
+        after = ""
+    }
 })

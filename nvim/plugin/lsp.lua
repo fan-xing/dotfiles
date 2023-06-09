@@ -3,6 +3,7 @@ require("mason").setup({
     ui = {
         -- Whether to automatically check for new versions when opening the :Mason window.
         check_outdated_packages_on_open = false,
+        border = "single",
         icons = {
             -- The list icon to use for installed packages.
             package_installed = "",
@@ -19,15 +20,15 @@ require("mason-lspconfig").setup_handlers({
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup({})
+        require("lspconfig")[server_name].setup({})
     end,
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:
 })
 local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
 end
 vim.diagnostic.config({
     virtual_text = false,
@@ -36,7 +37,6 @@ vim.diagnostic.config({
     update_in_insert = true,
     severity_sort = true,
 })
-
 
 require("nvim-treesitter.configs").setup({
     -- A list of parser names, or "all"
@@ -75,24 +75,22 @@ require("nvim-treesitter.configs").setup({
 require('go').setup({
     tag_transform = "camelcase",
     tag_options = 'json=omitempty',
-    gofmt = "gofmt"
+    gofmt = "gofmt",
+    dap_debug_gui = false,
+    luasnip = true, -- set true to enable included luasnip
+    lsp_keymaps = false, -- true: apply default lsp keymaps
+    dap_debug_keymap = false
 })
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.go",
     callback = function()
-            require('go.format').goimport()
+        require('go.format').goimport()
     end,
     group = format_sync_grp,
 })
 
 require('nvim-treesitter.configs').setup({})
-
-require("lspsaga").setup({
-      diagnostic = {
-          on_insert = false,
-      }
-})
 
 require('treesj').setup({
     max_join_length = 1000,

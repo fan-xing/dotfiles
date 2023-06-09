@@ -1,10 +1,10 @@
 --notify
 vim.notify = require("notify")
 vim.notify.setup({
-    fps = 60,
-    icons = {
-        WARN = " ",
-    },
+    timeout = 3000,
+    max_width = 100,
+    max_height = 100,
+    top_down = false,
 })
 require("telescope").load_extension("notify")
 
@@ -23,6 +23,7 @@ require("noice").setup({
     lsp = {
         progress = {
             enabled = false,
+            view = "mini",
         },
     },
     routes = {
@@ -47,38 +48,41 @@ require("noice").setup({
             opts = { skip = true },
 
         }
-    }
+    },
+    views = {
+        mini = {
+            position = {
+                col = "0%",
+            }
+        },
+        cmdline_popup = {
+            position = {
+                row = "80%",
+                col = "50%",
+            },
+        }
+    },
 })
 
 --colorizer
 require("colorizer").setup({
-    names = false
+    user_default_options = {
+        names = false
+    }
 })
 
 --indent_blankline
-vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("tab:  ")
 vim.opt.listchars:append("eol:↴")
+vim.g.indent_blankline_filetype_exclude = { 'dashboard' }
 require("indent_blankline").setup({
     -- for example, context is off by default, use this to turn it on
-    --show_current_context = true,
-    --show_current_context_start = true,
+    show_current_context = true,
+    -- show_current_context_start = true,
     space_char_blankline = " ",
-    char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-    },
+    char_priority = 50,
 })
 
 local db = require('dashboard')
@@ -92,7 +96,12 @@ db.setup({
             enable = false,
         },
         shortcut = {
-            { desc = ' Plugin', group = '@property', action = 'Lazy', key = 'l' },
+            {
+                desc = ' Plugin',
+                group = '@property',
+                action = 'Lazy',
+                key = 'l',
+            },
             {
                 icon = ' ',
                 icon_hl = '@variable',
@@ -108,10 +117,10 @@ db.setup({
                 key = 'p',
             },
             {
-                desc = ' dotfiles',
+                desc = ' New File',
                 group = 'Number',
-                action = 'Telescope dotfiles',
-                key = 'd',
+                action = 'enew',
+                key = 'n',
             },
         },
     },

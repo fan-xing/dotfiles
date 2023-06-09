@@ -83,6 +83,50 @@ require("telescope").setup({
     pickers = {
         find_files = {
             theme = "ivy",
+            fname_width=70,
+        },
+        oldfiles = {
+            theme = "ivy",
+            fname_width=70,
+        },
+        live_grep = {
+            theme = "ivy",
+            fname_width=70,
+        },
+        grep_string = {
+            theme = "ivy",
+            fname_width=70,
+        },
+        buffers = {
+            theme = "ivy",
+            fname_width = 70,
+            mappings = {
+                i = {
+                    ["<C-d>"] = actions.delete_buffer,
+                }
+            }
+        },
+        lsp_document_symbols = {
+            theme = "ivy",
+            fname_width=70,
+            symbol_width=50
+        },
+        lsp_dynamic_workspace_symbols = {
+            theme = "ivy",
+            fname_width=70,
+            symbol_width=50,
+        },
+        lsp_references = {
+            theme = "ivy",
+            fname_width=70,
+        },
+        lsp_definitions = {
+            theme = "ivy",
+            fname_width=70,
+        },
+        lsp_implementations = {
+            theme = "ivy",
+            fname_width=70,
         },
     },
 })
@@ -94,4 +138,5 @@ require("project_nvim").setup({
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
+    exclude_dirs = {"~/.config/nvim/*"},
 })

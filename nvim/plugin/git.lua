@@ -1,6 +1,6 @@
 --toggleterm
 require("toggleterm").setup({
-    size = 10,
+    size = 20,
     open_mapping = [[<c-\>]],
 })
 
@@ -63,6 +63,9 @@ require("gitsigns").setup({
         map("n", "<leader>hp", gs.preview_hunk)
         map("n", "<leader>hR", gs.reset_hunk)
     end,
+    current_line_blame_opts = {
+        virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
+    }
 })
 require("diffview").setup({
     view = {
@@ -87,7 +90,7 @@ require("diffview").setup({
         },
         file_history = {
             -- Config for changed files in file history views.
-            layout = "diff2_horizontal",
+            layout = "diff2_vertical",
         },
     },
 })
