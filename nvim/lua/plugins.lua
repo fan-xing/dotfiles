@@ -98,5 +98,4 @@ return {
     "folke/which-key.nvim",
     "folke/todo-comments.nvim",
     "nvim-tree/nvim-tree.lua",
-    'Bekaboo/dropbar.nvim',
 }
