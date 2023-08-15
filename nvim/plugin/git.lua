@@ -10,7 +10,7 @@ local lazygit = Terminal:new({
         cmd = "lazygit",
         direction = "float",
         float_opts = {
-            border = "double",
+            border = "single",
         },
         -- function to run on opening the terminal
         on_open = function(term)

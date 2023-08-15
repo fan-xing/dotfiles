@@ -2,8 +2,14 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
+        lazy = true,
+        priority = 1000
     },
-    'sainnhe/gruvbox-material',
+    {
+        "sainnhe/gruvbox-material",
+        lazy = true,
+        priority = 1000
+    },
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
     "nvim-telescope/telescope-symbols.nvim",
@@ -42,9 +48,8 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            -- "hrsh7th/cmp-nvim-lsp-signature-help",
             "saadparwaiz1/cmp_luasnip",
-            -- "onsails/lspkind.nvim",
+            "onsails/lspkind.nvim",
         },
     },
     {
@@ -98,4 +103,5 @@ return {
     "folke/which-key.nvim",
     "folke/todo-comments.nvim",
     "nvim-tree/nvim-tree.lua",
+    "SmiteshP/nvim-navic",
 }

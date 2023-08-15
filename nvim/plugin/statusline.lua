@@ -120,7 +120,7 @@ ins_left({
     "filename",
     --cond = conditions.buffer_not_empty,
     color = { fg = colors.green, gui = "bold" },
-    -- path = 1,
+    path = 1,
 })
 
 ins_left({ "location" })

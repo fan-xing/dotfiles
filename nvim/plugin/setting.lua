@@ -80,5 +80,6 @@ set updatetime=200
 
 set laststatus=3
 
-set splitkeep = "screen"
+set splitkeep=screen
+set cursorline
 ]])

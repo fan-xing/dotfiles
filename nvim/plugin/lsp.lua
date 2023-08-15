@@ -15,6 +15,17 @@ require("mason").setup({
     },
 })
 
+
+local navic = require("nvim-navic")
+navic.setup {
+    highlight = true,
+    depth_limit = 5,
+    lsp = {
+        auto_attach = true,
+    },
+}
+vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+
 require("mason-lspconfig").setup_handlers({
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
@@ -77,7 +88,7 @@ require('go').setup({
     tag_options = 'json=omitempty',
     gofmt = "gofmt",
     dap_debug_gui = false,
-    luasnip = true, -- set true to enable included luasnip
+    luasnip = true,      -- set true to enable included luasnip
     lsp_keymaps = false, -- true: apply default lsp keymaps
     dap_debug_keymap = false
 })

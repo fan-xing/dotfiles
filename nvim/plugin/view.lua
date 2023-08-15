@@ -57,7 +57,7 @@ require("noice").setup({
     views = {
         mini = {
             position = {
-                col = "5%",
+                col = "0%",
             }
         },
         cmdline_popup = {
