@@ -83,9 +83,7 @@ set langmenu=zh_CN.UTF-8
 " 设置当文件被改动时自动载入
 set autoread
 
-call plug#begin('~/.vim/bundle')
-
-Plug 'VundleVim/Vundle.vim'
+call plug#begin()
 
 Plug 'preservim/nerdtree'
 map <F2> :NERDTreeToggle<CR>
@@ -138,7 +136,7 @@ call plug#end()
 "gruvbox
 let g:gruvbox_contrast_dark = 'dark'
 let g:gruvbox_transparent_bg = 1
-colorscheme gruvbox
+" colorscheme gruvbox
 
 
 "rainbow 括号

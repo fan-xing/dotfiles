@@ -1,0 +1,22 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - reverse
+    selectedRangeBgColor:
+      - reverse
+  erdFontsVersion: "2"
+  showIcons: true
+  border: 'double' # one of 'single' | 'double' | 'rounded' | 'hidden'
+  language: 'zh-CN'
+os:
+  editPreset: "nvim"
+keybinding:
+  universal:
+    quit-alt1: '<c-q>' # alternative/alias of quit
+    optionMenu: 'x' # show help menu
+    prevPage: '<c-b>' # go to next page in list
+    nextPage: '<c-f>' # go to previous page in list
+  commits:
+    moveDownCommit: '<c-J>' # move commit down one
+    moveUpCommit: '<c-K>' # move commit up one
+    subprocess: yes

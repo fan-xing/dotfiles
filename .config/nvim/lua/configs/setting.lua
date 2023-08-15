@@ -1,4 +1,4 @@
-vim.cmd([[
+vim.cmd [[
 " 色彩
 set termguicolors
 
@@ -12,7 +12,6 @@ set sidescroll=1
 "tab缩进
 set tabstop=4
 set shiftwidth=4
-
 
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
@@ -42,6 +41,8 @@ autocmd FileType * set formatoptions-=ro
 
 " 将制表符扩展为空格
 autocmd FileType * set expandtab
+autocmd FileType go set noexpandtab
+autocmd FileType idl set noexpandtab
 
 "显示匹配
 set showmatch
@@ -68,17 +69,25 @@ set langmenu=zh_CN.UTF-8
 " 编码
 set encoding=UTF-8
 
-" 设置当文件被改动时自动载入
-set autoread
+set completeopt=menu,menuone
 
-set completeopt=menu,menuone,noselect,noinsert
-
-let g:netrw_browse_split = 3
+let g:netrw_browse_split=3
 
 "检查更新时间
-set updatetime=200
+set updatetime=500
+
+" 设置当文件被改动时自动载入
+set autoread
+au CursorHold,CursorHoldI * checktime
+au FocusGained,BufEnter * :checktime
 
 set laststatus=3
 
-set splitkeep = "screen"
-]])
+set splitkeep=screen
+set cursorline
+" set iskeyword+=$
+]]
+local o = vim.o
+o.cursorlineopt = "both" -- to enable cursorline
+o.foldmethod = "indent"
+o.foldlevelstart = 1000
