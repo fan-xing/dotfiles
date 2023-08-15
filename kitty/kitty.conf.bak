@@ -282,7 +282,7 @@ font_size 15.0
 
 #: Scrollback {{{
 
-# scrollback_lines 2000
+scrollback_lines 5000
 
 #: Number of lines of history to keep in memory for scrolling back.
 #: Memory is allocated on demand. Negative numbers are (effectively)
@@ -884,7 +884,7 @@ map shift+down move_window down
 #: insensitive, from the set [0-9A-Z]. Specify your preference as a
 #: string of characters.
 
-# confirm_os_window_close -1
+confirm_os_window_close 1
 
 #: Ask for confirmation when closing an OS window or a tab with at
 #: least this number of kitty windows in it by window manager (e.g.
@@ -903,7 +903,7 @@ map shift+down move_window down
 
 #: Tab bar {{{
 
-# tab_bar_edge bottom
+# tab_bar_edge top
 
 #: The edge to show the tab bar on, top or bottom.
 
@@ -918,7 +918,7 @@ map shift+down move_window down
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-tab_bar_style hidden
+tab_bar_style hidden 
 
 #: The tab bar style, can be one of:
 
@@ -943,7 +943,7 @@ tab_bar_style hidden
 #:     The tab bar is hidden. If you use this, you might want to create
 #:     a mapping for the select_tab action which presents you with a list of
 #:     tabs and allows for easy switching to a tab.
-
+map shift+cmd+t select_tab
 # tab_bar_align left
 
 #: The horizontal alignment of the tab bar, can be one of: left,
@@ -1071,7 +1071,7 @@ tab_bar_style hidden
 
 #: The foreground and background colors.
 
-background_opacity 0.1
+# background_opacity 1.0
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -1092,16 +1092,18 @@ background_opacity 0.1
 #: this option when reloading the config will only work if
 #: dynamic_background_opacity was enabled in the original config.
 
-background_image /Users/zhangboyang/Pictures/背景/void-wallpaper-2-1920×1080.png
+# background_image /Users/zhangboyang/Pictures/背景/void-wallpaper-2-1920×1080.png
+background_image /Users/zhangboyang/Pictures/背景/IMG_202306209285_png.png
+
 
 #: Path to a background image. Must be in PNG format.
 
-# background_image_layout tiled
+background_image_layout scaled
 
 #: Whether to tile, scale or clamp the background image. The value can
 #: be one of tiled, mirror-tiled, scaled, clamped or centered.
 
-# background_image_linear no
+background_image_linear yes
 
 #: When background image is scaled, whether linear interpolation
 #: should be used.
@@ -1113,7 +1115,7 @@ background_image /Users/zhangboyang/Pictures/背景/void-wallpaper-2-1920×1080.
 #: decrease_background_opacity) or the remote control facility.
 #: Changing this option by reloading the config is not supported.
 
-# background_tint 0.0
+background_tint 0.95
 
 #: How much to tint the background image by the background color. This
 #: option makes it easier to read the text. Tinting is done using the
@@ -1382,7 +1384,7 @@ background_image /Users/zhangboyang/Pictures/背景/void-wallpaper-2-1920×1080.
 #: builds do not do update checking. Changing this option by reloading
 #: the config is not supported.
 
-# startup_session none
+startup_session ~/.config/kitty/startup.conf
 
 #: Path to a session file to use for all kitty instances. Can be
 #: overridden by using the kitty --session =none command line option
@@ -1513,7 +1515,10 @@ background_image /Users/zhangboyang/Pictures/背景/void-wallpaper-2-1920×1080.
 #: background_opacity. If you want to use both, you are probably
 #: better off just hiding the titlebar with hide_window_decorations.
 
-# macos_option_as_alt no
+macos_option_as_alt yes
+map alt+left send_text all \x1b\x62
+map alt+right send_text all \x1b\x66
+map ctrl+- send_text all \x1f
 
 #: Use the Option key as an Alt key on macOS. With this set to no,
 #: kitty will use the macOS native Option+Key to enter Unicode
@@ -1903,9 +1908,9 @@ map cmd+d close_window
 
 # map kitty_mod+[ previous_window
 map ctrl+cmd+h neighboring_window left
-map ctrl+cmd+l move_window right
+map ctrl+cmd+l neighboring_window right
 map ctrl+cmd+j neighboring_window down
-map ctrl+cmd+k move_window up
+map ctrl+cmd+k neighboring_window up
 map ctrl+cmd+o nth_window -1
 
 #: Move window forward
@@ -2018,7 +2023,7 @@ map cmd+left    previous_tab
 
 #: Close OS window
 
-# map shift+cmd+w close_os_window
+map ctrl+cmd+w close_os_window
 
 #: Move tab forward
 
@@ -2356,9 +2361,3 @@ map cmd+enter    toggle_fullscreen
 #: }}}
 
 #: }}}
-
-
-# BEGIN_KITTY_THEME
-# Catppuccin-Macchiato
-include current-theme.conf
-# END_KITTY_THEME
