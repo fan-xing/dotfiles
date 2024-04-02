@@ -1,7 +1,14 @@
 --leap
 require("leap").add_default_mappings()
-vim.keymap.del({'x', 'o'}, 'x')
-vim.keymap.del({'x', 'o'}, 'X')
+vim.keymap.del({ 'x', 'o' }, 'x')
+vim.keymap.del({ 'x', 'o' }, 'X')
+vim.keymap.set('n', 's', function ()
+  local focusable_windows = vim.tbl_filter(
+    function (win) return vim.api.nvim_win_get_config(win).focusable end,
+    vim.api.nvim_tabpage_list_wins(0)
+  )
+  require('leap').leap { target_windows = focusable_windows }
+end)
 
 --neogen
 require("neogen").setup({
@@ -9,8 +16,7 @@ require("neogen").setup({
 })
 
 --translator 翻译
-vim.api.nvim_command("let g:translator_default_engines = ['bing','google']")
---vim.api.nvim_command("let g:translator_proxy_url = 'socks5://127.0.0.1:1086'")
+vim.api.nvim_command("let g:translator_default_engines = ['bing', 'google', 'haici', 'youdao']")
 
 -- nvim-tree
 local function tree_on_attach(bufnr)
@@ -51,55 +57,6 @@ npairs.setup({
     },
 })
 
---fold ufo
-vim.o.foldcolumn = "0" -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-}
-local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-for _, ls in ipairs(language_servers) do
-    require("lspconfig")[ls].setup({
-        capabilities = capabilities,
-        -- you can add other fields for setting up lsp server in this table
-    })
-end
-local handler = function(virtText, lnum, endLnum, width, truncate)
-    local newVirtText = {}
-    local suffix = (" 祉折叠%d行 "):format(endLnum - lnum)
-    local sufWidth = vim.fn.strdisplaywidth(suffix)
-    local targetWidth = width - sufWidth
-    local curWidth = 0
-    for _, chunk in ipairs(virtText) do
-        local chunkText = chunk[1]
-        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-        if targetWidth > curWidth + chunkWidth then
-            table.insert(newVirtText, chunk)
-        else
-            chunkText = truncate(chunkText, targetWidth - curWidth)
-            local hlGroup = chunk[2]
-            table.insert(newVirtText, { chunkText, hlGroup })
-            chunkWidth = vim.fn.strdisplaywidth(chunkText)
-            -- str width returned from truncate() may less than 2nd argument, need padding
-            if curWidth + chunkWidth < targetWidth then
-                suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
-            end
-            break
-        end
-        curWidth = curWidth + chunkWidth
-    end
-    table.insert(newVirtText, { suffix, "MoreMsg" })
-    return newVirtText
-end
-require("ufo").setup({
-    open_fold_hl_timeout = 150,
-    fold_virt_text_handler = handler,
-})
-
 --comment
 require('Comment').setup({
     padding = true,
@@ -112,11 +69,6 @@ require('Comment').setup({
         block = '<leader>cb',
     },
 })
-
-vim.cmd([[
-    hi BqfPreviewBorder guifg=#50a14f ctermfg=71
-    hi link BqfPreviewRange Search
-]])
 
 require('bqf').setup({
     auto_enable = true,
@@ -155,7 +107,7 @@ require('bqf').setup({
     },
     filter = {
         fzf = {
-            action_for = { ['ctrl-s'] = 'split',['ctrl-t'] = 'tab drop' },
+            action_for = { ['ctrl-s'] = 'split', ['ctrl-t'] = 'tab drop' },
             extra_opts = { '--bind', 'ctrl-o:toggle-all', '--prompt', '> ' }
         }
     }
@@ -166,10 +118,10 @@ require("which-key").setup({
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
     window = {
-        margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]
+        margin = { 0, 0, 0, 0 },  -- extra window margin [top, right, bottom, left]
         padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
 
-        border = "single", -- none, single, double, shadow
+        border = "single",        -- none, single, double, shadow
     },
 })
 require("todo-comments").setup({

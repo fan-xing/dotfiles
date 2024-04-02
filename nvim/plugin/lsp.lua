@@ -1,3 +1,7 @@
+-- go
+require("go").setup({
+})
+
 -- lsp
 require("mason").setup({
     ui = {
@@ -15,28 +19,18 @@ require("mason").setup({
     },
 })
 
-
-local navic = require("nvim-navic")
-navic.setup {
-    highlight = true,
-    depth_limit = 5,
-    lsp = {
-        auto_attach = true,
-    },
-}
-vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-
 require("mason-lspconfig").setup_handlers({
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup({})
+        require("lspconfig")[server_name].setup({
+        })
     end,
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:
 })
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
@@ -45,7 +39,7 @@ vim.diagnostic.config({
     virtual_text = false,
     signs = true,
     underline = true,
-    update_in_insert = false,
+    update_in_insert = true,
     severity_sort = true,
 })
 
@@ -83,26 +77,14 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
-require('go').setup({
-    tag_transform = "camelcase",
-    tag_options = 'json=omitempty',
-    gofmt = "gofmt",
-    dap_debug_gui = false,
-    luasnip = true,      -- set true to enable included luasnip
-    lsp_keymaps = false, -- true: apply default lsp keymaps
-    dap_debug_keymap = false
-})
-local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*.go",
-    callback = function()
-        require('go.format').goimport()
-    end,
-    group = format_sync_grp,
-})
+require("nvim-treesitter.configs").setup({})
 
-require('nvim-treesitter.configs').setup({})
-
-require('treesj').setup({
+require("treesj").setup({
     max_join_length = 1000,
+})
+
+require('lspsaga').setup({
+    lightbulb = {
+        enable = false,
+    },
 })

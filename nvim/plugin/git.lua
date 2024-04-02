@@ -1,27 +1,34 @@
 --toggleterm
 require("toggleterm").setup({
     size = 20,
-    open_mapping = [[<c-\>]],
+    open_mapping = [[<C-\>]],
+    shell = "zsh"
 })
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 --custom lazygit
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({
-        cmd = "lazygit",
-        direction = "float",
-        float_opts = {
-            border = "single",
-        },
-        -- function to run on opening the terminal
-        on_open = function(term)
-            vim.cmd("startinsert!")
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-        end,
-        -- function to run on closing the terminal
-        on_close = function(term)
-            vim.cmd("startinsert!")
-        end,
-    })
+    cmd = "lazygit",
+    direction = "float",
+    float_opts = {
+        border = "none",
+    },
+    -- function to run on opening the terminal
+    on_open = function(term)
+        vim.cmd("startinsert!")
+        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+    end,
+    -- function to run on closing the terminal
+    on_close = function(term)
+        vim.cmd("startinsert!")
+    end,
+})
 
 function _lazygit_toggle()
     lazygit.dir = vim.fn.expand("%:p:h")
@@ -67,30 +74,17 @@ require("gitsigns").setup({
         virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
     }
 })
-require("diffview").setup({
-    view = {
-        -- Configure the layout and behavior of different types of views.
-        -- Available layouts:
-        --    |'diff1_plain'
-        --    |'diff2_horizontal'
-        --    |'diff2_vertical'
-        --    |'diff3_horizontal'
-        --    |'diff3_vertical'
-        --    |'diff3_mixed'
-        --    |'diff4_mixed'
-        -- For more info, see ':h diffview-config-view.x.layout'.
-        default = {
-            -- Config for changed files, and staged files in diff views.
-            layout = "diff2_horizontal",
-        },
-        merge_tool = {
-            -- Config for conflicted files in diff views during a merge or rebase.
-            layout = "diff3_mixed",
-            disable_diagnostics = false, -- Temporarily disable diagnostics for conflict buffers while in the view.
-        },
-        file_history = {
-            -- Config for changed files in file history views.
-            layout = "diff2_vertical",
-        },
+
+require('blame').setup({
+    merge_consecutive = false,
+})
+require('git-conflict').setup({
+    default_mappings = {
+        ours = 'o',
+        theirs = 't',
+        none = '0',
+        both = 'b',
+        next = 'n',
+        prev = 'p',
     },
 })
