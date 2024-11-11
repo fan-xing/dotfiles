@@ -1,5 +1,5 @@
 --leap
-require('leap').create_default_mappings()
+require('leap').setup{}
 
 --neogen
 require("neogen").setup {

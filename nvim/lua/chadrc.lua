@@ -47,7 +47,7 @@ local M = {
     },
   },
   base46 = {
-    theme = "catppuccin",
+    theme = "github_dark",
     transparency = false,
   },
 }
