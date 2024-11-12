@@ -80,6 +80,7 @@ require("telescope").setup {
     oldfiles = {
       fname_width = 70,
       theme = "ivy",
+      only_cwd = true,
     },
     live_grep = {
       fname_width = 70,
