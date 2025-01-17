@@ -21,16 +21,6 @@ return {
     "williamboman/mason.nvim",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
-      "jay-babu/mason-nvim-dap.nvim",
-    },
-  },
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      "rcarriga/nvim-dap-ui",
-      "nvim-neotest/nvim-nio",
-      "jay-babu/mason-nvim-dap.nvim",
-      "thehamsta/nvim-dap-virtual-text",
     },
   },
   "danymat/neogen",

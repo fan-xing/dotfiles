@@ -38,7 +38,6 @@ require "nvchad.autocmds"
 --   require "mappings"
 -- end)
 
-require "configs.debug"
 require "configs.git"
 require "configs.cmp"
 require "configs.lsp"

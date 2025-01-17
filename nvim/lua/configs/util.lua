@@ -1,5 +1,5 @@
 --leap
-require('leap').setup{}
+require("leap").setup {}
 
 --neogen
 require("neogen").setup {
@@ -21,8 +21,12 @@ local function tree_on_attach(bufnr)
 end
 require("nvim-tree").setup {
   on_attach = tree_on_attach,
+  update_focused_file = {
+    enable = true,
+  },
   view = {
     width = "20%",
+    centralize_selection = true,
   },
   filters = {
     dotfiles = true,

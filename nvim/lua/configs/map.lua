@@ -24,27 +24,6 @@ vim.keymap.set("n", "]e", vim.diagnostic.goto_next)
 --nvim-tree
 vim.keymap.set("n", "<F2>", "<Cmd>NvimTreeFindFileToggle<CR>")
 
---dap dapui
-vim.keymap.set("n", "<F4>", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
-vim.keymap.set(
-  "n",
-  "<Leader>B",
-  "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>"
-)
-vim.keymap.set("n", "<F5>", "<Cmd>lua require'dap'.continue()<CR>")
-vim.keymap.set("n", "<F6>", "<Cmd>lua require'dap'.step_into()<CR>")
-vim.keymap.set("n", "<F7>", "<Cmd>lua require'dap'.step_over()<CR>")
-vim.keymap.set("n", "<F8>", "<Cmd>lua require'dap'.step_out()<CR>")
-vim.keymap.set("n", "<F9>", '<cmd>lua require("dapui").toggle({ reset = true })<CR>')
-function NavbuddyToggle()
-  local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-  if buf_ft == "Navbuddy" then
-    vim.cmd "q"
-  else
-    vim.cmd "Navbuddy"
-  end
-end
-
 -- git
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
 
