@@ -88,6 +88,7 @@ require("telescope").setup {
     },
     grep_string = {
       fname_width = 70,
+      theme = "ivy",
     },
     buffers = {
       fname_width = 70,
