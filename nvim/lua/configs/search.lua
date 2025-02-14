@@ -2,8 +2,18 @@
 
 local action_layout = require "telescope.actions.layout"
 local actions = require "telescope.actions"
+local pickerTheme = "ivy" -- cursor ivy dropdown
 require("telescope").setup {
   defaults = {
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+    },
     path_display = { "filename_first" },
     mappings = {
       i = {
@@ -75,24 +85,26 @@ require("telescope").setup {
   pickers = {
     find_files = {
       fname_width = 70,
-      theme = "ivy",
+      theme = pickerTheme,
     },
     oldfiles = {
       fname_width = 70,
-      theme = "ivy",
+      theme = pickerTheme,
       only_cwd = true,
     },
     live_grep = {
       fname_width = 70,
-      theme = "ivy",
+      theme = pickerTheme,
+      additional_args = { "--no-ignore" },
     },
     grep_string = {
       fname_width = 70,
-      theme = "ivy",
+      theme = pickerTheme,
+      additional_args = { "--no-ignore" },
     },
     buffers = {
       fname_width = 70,
-      theme = "ivy",
+      theme = pickerTheme,
       mappings = {
         i = {
           ["<C-d>"] = actions.delete_buffer,
@@ -103,35 +115,26 @@ require("telescope").setup {
       fname_width = 70,
       symbol_width = 70,
       ignore_symbols = { "variable", "string" },
-      theme = "ivy",
+      theme = pickerTheme,
     },
     lsp_dynamic_workspace_symbols = {
       fname_width = 70,
       symbol_width = 70,
       ignore_symbols = { "variable", "string" },
-      theme = "ivy",
+      theme = pickerTheme,
     },
     lsp_references = {
       fname_width = 70,
       include_declaration = false,
-      theme = "ivy",
+      theme = pickerTheme,
     },
     lsp_definitions = {
       fname_width = 70,
-      theme = "ivy",
+      theme = pickerTheme,
     },
     lsp_implementations = {
       fname_width = 70,
-      theme = "ivy",
+      theme = pickerTheme,
     },
   },
-}
-require("telescope").load_extension "projects"
-
---project
-require("project_nvim").setup {
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  -- refer to the configuration section below
-  exclude_dirs = { "~/.config/nvim/*" },
 }

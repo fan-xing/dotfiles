@@ -10,7 +10,6 @@ vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>")
 vim.keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_definitions<cr>")
 --鼠标
 vim.keymap.set("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>")
-vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<cr>")
 vim.keymap.set("n", "<leader>ft", "<cmd>Telescope lsp_type_definitions<CR>")
 vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>")
 
@@ -79,16 +78,16 @@ vim.api.nvim_set_keymap("n", "<leader>nh", ":lua no_highlight()<cr>", { noremap 
 -- 映射 <S-q> 关闭locallist quickfix
 vim.keymap.set("n", "<S-q>", "<Cmd>cclose | cexpr [] | lclose | lexpr []<CR>")
 -- 映射 <leader>cpf，将当前文件名复制到系统剪贴板中
-vim.api.nvim_set_keymap("n", "<leader>cpf", ":let @+ = expand('%:t')<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>cpf", ":let @+ = expand('%:r:t')<CR>", { noremap = true })
 -- 映射 <leader>cpw，将当前单词复制到系统剪贴板中
 vim.api.nvim_set_keymap(
   "n",
   "<leader>cpw",
-  ":let @+ = expand('%:t').expand('::').expand('<cword>')<CR>",
+  ":let @+ = expand('%:r:t').expand('::').expand('<cword>')<CR>",
   { noremap = true }
 )
 -- 映射 <leader>cpl，将当前光标所在行复制到系统剪贴板中
-vim.api.nvim_set_keymap("n", "<leader>cpl", ":let @+ = expand('%:t').expand(':').line('.')<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>cpl", ":let @+ = expand('%:r:t').expand(':').line('.')<CR>", { noremap = true })
 -- 该命令来自 Copilot 插件，用于实现智能编写代码的功能
 -- vim.api.nvim_set_keymap('i', '<C-l>', 'copilot#Accept(\'\\<CR>\')', { expr = true, silent = true, script = true })
 -- 刷新全部buffer
