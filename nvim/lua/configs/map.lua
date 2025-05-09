@@ -96,8 +96,10 @@ vim.keymap.set("i", "<C-c>", "<ESC>")
 -- 复制后不再跳转开头
 vim.keymap.set("v", "y", "ygv<esc>")
 
--- 开关line number
-vim.api.nvim_set_keymap("n", "<leader>ln", ":set number!<CR>", { noremap = true })
+-- 开关相对line number
+vim.keymap.set({ "n", "v" }, "<leader>ln", function()
+  vim.opt.relativenumber = not vim.opt.relativenumber:get()
+end)
 
 -- 粘贴p和P行为交换
 vim.keymap.set({ "x" }, "p", "P")
@@ -114,4 +116,3 @@ end, {})
 -- leap
 vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
 vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
-

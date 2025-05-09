@@ -67,8 +67,4 @@ return {
     lazy = false,
   },
   "Bekaboo/dropbar.nvim",
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-  },
 }

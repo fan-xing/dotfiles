@@ -85,4 +85,5 @@ set laststatus=3
 
 set splitkeep=screen
 set cursorline
+set iskeyword+=$
 ]])
