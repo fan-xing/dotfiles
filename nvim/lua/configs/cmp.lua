@@ -62,6 +62,7 @@ cmp.setup {
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = "path" },
     { name = "buffer", group_index = 2 },
+    { name = "nvim_lua" },
   },
 }
 -- `/` cmdline setup.

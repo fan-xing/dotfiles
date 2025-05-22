@@ -1,4 +1,4 @@
-vim.cmd([[
+vim.cmd [[
 " 色彩
 set termguicolors
 
@@ -85,5 +85,9 @@ set laststatus=3
 
 set splitkeep=screen
 set cursorline
-set iskeyword+=$
-]])
+" set iskeyword+=$
+]]
+local o = vim.o
+o.cursorlineopt = "both" -- to enable cursorline
+o.foldmethod = "indent"
+o.foldlevelstart = 1000

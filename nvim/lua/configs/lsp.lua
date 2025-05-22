@@ -21,18 +21,25 @@ require("mason").setup {
     },
   },
 }
-
 require("mason-lspconfig").setup {
   automatic_enable = true,
 }
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
-end
+local lua_lsp_settings = {
+  Lua = {
+    workspace = {
+      library = {
+        vim.fn.expand "$VIMRUNTIME/lua",
+        vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
+        "${3rd}/luv/library",
+      },
+    },
+  },
+}
+vim.lsp.config("lua_ls", {
+  settings = lua_lsp_settings,
+})
 vim.diagnostic.config {
   virtual_text = false,
-  signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,
@@ -40,8 +47,18 @@ vim.diagnostic.config {
 
 require("nvim-treesitter.configs").setup {}
 
+require("treesitter-context").setup {}
+
 require("treesj").setup {
   max_join_length = 1000,
 }
 
 require("dropbar").setup {}
+
+require("tiny-inline-diagnostic").setup {
+  -- Style preset for diagnostic messages
+  -- Available options:
+  -- "modern", "classic", "minimal", "powerline",
+  -- "ghost", "simple", "nonerdfont", "amongus"
+  preset = "powerline",
+}

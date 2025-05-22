@@ -35,6 +35,19 @@ require("nvim-tree").setup {
     enable = true,
   },
 }
+local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
+vim.api.nvim_create_autocmd("User", {
+  pattern = "NvimTreeSetup",
+  callback = function()
+    local events = require("nvim-tree.api").events
+    events.subscribe(events.Event.NodeRenamed, function(data)
+      if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+        data = data
+        Snacks.rename.on_rename_file(data.old_name, data.new_name)
+      end
+    end)
+  end,
+})
 
 --autopairs
 local npairs = require "nvim-autopairs"
@@ -68,27 +81,16 @@ require("Comment").setup {
 require("which-key").setup {}
 require("quicker").setup {}
 
---toggleterm
-require("toggleterm").setup {
-  size = function(term)
-    if term.direction == "horizontal" then
-      return 20
-    elseif term.direction == "vertical" then
-      return vim.o.columns * 0.4
-    end
-  end,
-  open_mapping = [[<C-\>]],
-  shell = "zsh",
-  shade_terminals = false,
-  direction = "horizontal",
-  winbar = {
-    enabled = true,
+require("leetcode").setup {
+  lang = "golang",
+  cn = { -- leetcode.cn
+    enabled = true, ---@type boolean
+    translator = true, ---@type boolean
+    translate_problems = true, ---@type boolean
+  },
+  injector = { ---@type table<lc.lang, lc.inject>
+    ["golang"] = {
+      before = { "package leetcode" },
+    },
   },
 }
-
-function _G.set_terminal_keymaps()
-  local opts = { buffer = 0 }
-  vim.keymap.set("t", "<M-w>", [[<C-\><C-n><C-w>]], opts)
-  vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-end
-vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"

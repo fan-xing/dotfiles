@@ -1,0 +1,77 @@
+lastupdatecheck: 0
+recentrepos:
+- /Users/didi/workspace/hades
+- /Users/didi/dotfiles
+- /Users/didi/workspace/crius
+- /Users/didi/workspace/qingfeng
+- /Users/didi/workspace/coeus
+- /Users/didi/workspace/crius/themis
+- /Users/didi/workspace/zeus
+- /Users/didi/workspace/zeus/xesci
+- /Users/didi/workspace/crius/xesci
+- /Users/didi/workspace/crius/module-test
+- /Users/didi/workspace/hermes
+- /Users/didi/workspace/vulcan
+- /Users/didi/workspace/zeus-admin
+- /Users/didi/workspace/matrix
+- /Users/didi/workspace/doris
+- /Users/didi/workspace/openapi
+- /Users/didi/workspace/openapi-doc
+- /Users/didi/workspace/poseidon
+- /Users/didi/workspace/openapi-go
+- /Users/didi/workspace/sisyphus
+startuppopupversion: 5
+customcommandshistory:
+- git cherry-pick 72ad8e67578a2d120595149a1a3c70dedae0911a
+- git cherry-pick 76bd7704e9e9a3a60c1d168fe4b23faaa7491310
+- git cherry-pick 27ed4740ecbe7d918d9dd87bbb0188ba9652e0f4
+- git cherry-pick 42e564e37461d026aea71666e958eb7b92a3029e
+- git cherry-pick c4e6aac0f74b0e99dede82be6d4e51fba203f790
+- git cherry-pick a817586943112cad896bd101fabb36dae4771b5b
+- 'test: 取消注释insert'
+- git amend -m
+- git cherry-pick 86e4042422ae2427fdf535321bcb593ec0b05dc7
+- git cherry-pick 141e728361c50d1195f6fed5c028f96739b6016e
+- git cherry-pick fb487a721723b9096f415d2c4e55ab11d50d80f6
+- git cherry-pick e6cc43d9adec0d933aa13e2f43b0286bd99fd650
+- git cherry-pick 247e294ada39e86d7259ea7d46d5f85336e2d4b8
+- git cherry-pick 2c451e84
+- git cherry-pick c307e2d54b4070009c0ca40eb5793ff1bb0e62f2
+- git cherry-pick 2c451e8400c78399a22acb2081a1fc48a39e1ac6
+- git cherry-pick 21e892bdeba003425c7b56ea087b533b4911061e
+- git push origin HEAD:refs/for/gray
+- git merge origin master
+- git push origin HEAD:refs/for/master-gray
+- git cherry-pick ee8f0ee94fe0fcc124c4072569f745dd24a0ec99
+- git cherry-pick continue
+- git cherry-pick --abort
+- git cherry-pick 0fe1528a5461e530ac810abd8760e8f88e1ff2b1
+- q
+- git fetch origin liuzeyi/car_order
+- git push origin feature_zhangboyang_0822_order_list:refs/for/master-gray
+- git push origin feature_zhangboyang_0822_order_list:refs/for/master
+- git cherry-pick --continue
+- git push origin HEAD:refs/for/master
+- git cherry-pick 93b005f9f60c6e07e376ccecb8c050b421d5ddd0
+- git cherry-pick 878747027976e1f6a473d3d267e0f77be2417995
+- git cherry-pick 1ef0bd9298df47d9256ca6db4bbf0f6c9f9e569f
+- git reset --hard ff45858c93f72de0924b24c4254a8caf2c90a6fb
+- git cherry-pick a6afc554b4b5c93b32f0cfde5eee19669f8d3b95
+- git cherry-pick 0f56442a9a0a113159ee43ceef66f7e6e6c42138
+- git push
+- git cherr-pick 247e294ada39e86d7259ea7d46d5f85336e2d4b8
+- git cherr-pick fb487a721723b9096f415d2c4e55ab11d50d80f6
+- git cherry-pick ac5ad9d10967171529e5813e80174fa9f394111a
+- git cherry-pick 4aaf522de2a9b0441235e1eeb19653434881b4ea
+- git cherry-pick ca6c2038132f1699833d187cd35b6f10d8a43360
+- 'fix: 创建退款'
+- git cherry-pick 100eb49a810a58bdcf81c681998a1516a88fecb7
+- git cherry-pick ceddd60bc50d0149f3c642ea46b1fc357f59f604
+- git cherry-pick db11cd5a546a601479ee1e51b9d493ac4613e711
+- git cherry-pick 057cf755ff63e38e487c5ca0c9303e87fd8ec917
+- git cherry-pick f4a1266f7a00272b0a0a0664dac0dfb10cf3da61
+- git pull origin master
+- git cherry-pick 7a914686505dd579fd9090320fee1b5dacbc0971
+- git cherry-pick 6eadb2b1bb36636381295401409d38b39ec57aa0
+hidecommandlog: false
+ignorewhitespaceindiffview: false
