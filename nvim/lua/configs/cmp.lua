@@ -14,9 +14,8 @@ cmp.setup {
     end,
   },
   window = {
-    -- documentation = {
-    --   winhighlight = "Normal:NONE",
-    -- },
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = {
     ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s", "c" }),
@@ -63,6 +62,7 @@ cmp.setup {
     -- { name = "path" },
     { name = "buffer", group_index = 2 },
     { name = "nvim_lua" },
+    { name = "nvim_lsp_signature_help" },
   },
 }
 -- `/` cmdline setup.
