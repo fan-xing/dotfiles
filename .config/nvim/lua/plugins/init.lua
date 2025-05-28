@@ -63,7 +63,7 @@ return {
   "akinsho/git-conflict.nvim",
   "lewis6991/gitsigns.nvim",
   "ggandor/leap.nvim",
-  "numtostr/Comment.nvim",
+  "numtostr/comment.nvim",
   {
     "voldikss/vim-translator",
     lazy = false,

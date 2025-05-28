@@ -86,4 +86,4 @@ vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
 vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 
 -- terminal
-vim.keymap.set("n", "<C-/>", "<cmd>lua Snacks.terminal.toggle()<cr>")
+vim.keymap.set({"n","t"}, "<C-\\>", "<cmd>lua Snacks.terminal.toggle()<cr>")
