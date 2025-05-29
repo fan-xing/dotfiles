@@ -1,4 +1,5 @@
 local dashboard = {}
+
 local layout = {
   layout = {
     box = "vertical",
@@ -25,11 +26,7 @@ require("snacks").setup {
   bigfile = { enabled = true },
   picker = {
     layout = layout,
-    formatters = {
-      file = {
-        filename_first = true,
-      },
-    },
+    formatters = { file = { filename_first = true } },
     win = {
       input = {
         keys = {
@@ -55,8 +52,6 @@ require("snacks").setup {
         },
       },
     },
-    filter = {
-      cwd = true,
-    },
+    filter = { cwd = true },
   },
 }

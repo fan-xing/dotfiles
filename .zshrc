@@ -126,3 +126,4 @@ export PATH=~/.rpc-tools:$PATH
 export EDITOR="nvim"
 export editor="nvim"
 export PATH="/opt/homebrew/bin:$PATH"
+export HOMEBREW_NO_AUTO_UPDATE=true
