@@ -80,11 +80,6 @@ return {
   {
     "kawre/leetcode.nvim",
   },
-  {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "VeryLazy", -- Or `LspAttach`
-    priority = 1000, -- needs to be loaded in first
-  },
   "nvim-lualine/lualine.nvim",
   {
     "folke/snacks.nvim",
