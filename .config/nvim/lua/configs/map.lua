@@ -31,6 +31,7 @@ end
 vim.keymap.set("n", "<leader>fe", "<cmd>lua vim.diagnostic.setloclist()<cr>")
 vim.keymap.set({ "v", "n" }, "<leader>fl", "<cmd>Neoformat<cr>")
 vim.keymap.set("n", "<Leader>fh", "<cmd>lua vim.lsp.buf.hover()<CR>")
+vim.keymap.set("n", "<Leader>fc", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 vim.keymap.set("n", "g?", vim.diagnostic.open_float)
 
 vim.keymap.set("n", "<F2>", "<Cmd>NvimTreeFindFileToggle<CR>")
