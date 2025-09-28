@@ -21,11 +21,10 @@
 #: heavy. Setting them manually is useful for font families that have
 #: many weight variants like Book, Medium, Thick, etc. For example::
 
-# font_family       Hack Nerd Font Mono
-# font_family       JetBrainsMono Nerd Font Mono
-# font_family       Iosevka Nerd Font Mono
-font_family       FiraMono Nerd Font Mono
-
+# font_family       family="Hack Nerd Font Mono"
+# font_family       family="JetBrainsMono Nerd Font Mono"
+# font_family       family="Iosevka Nerd Font Mono"
+font_family       family="FiraMono Nerd Font Mono"
 
 #:     bold_font        auto
 #:     italic_font      auto
@@ -925,7 +924,7 @@ confirm_os_window_close 1
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-tab_bar_style hidden 
+tab_bar_style hidden
 
 #: The tab bar style, can be one of:
 
@@ -1565,7 +1564,7 @@ map ctrl+- send_text all \x1f
 #: this option is obsolete (although still supported). Consider using
 #: text_composition_strategy instead.
 
-# macos_traditional_fullscreen no
+macos_traditional_fullscreen yes
 
 #: Use the macOS traditional full-screen transition, that is faster,
 #: but less pretty.
@@ -1817,6 +1816,8 @@ map ctrl+- send_text all \x1f
 #: Browse scrollback buffer in pager
 
 # map kitty_mod+h show_scrollback
+map cmd+f launch --location=hsplit --stdin-source=@screen_scrollback --stdin-add-formatting less -R
+
 
 #::  You can pipe the contents of the current screen and history
 #::  buffer as STDIN to an arbitrary program using launch --stdin-
@@ -2371,10 +2372,7 @@ map cmd+enter    toggle_fullscreen
 
 #: }}}
 
-# search
-map cmd+f launch --location=hsplit --allow-remote-control kitty +kitten kitty_search/search.py @active-kitty-window-id
-
 # BEGIN_KITTY_THEME
-# GitHub Dark
+# GitHub Dark Dimmed
 include current-theme.conf
 # END_KITTY_THEME
