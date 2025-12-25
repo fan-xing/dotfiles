@@ -55,7 +55,6 @@ vim.keymap.set("n", "<C-x>", ":lua Snacks.bufdelete()<cr>", { noremap = true })
 vim.keymap.set("n", "<leader>fw", "*", { noremap = true })
 vim.keymap.set("n", "<leader>pw", ":lua print_current_word_result()<CR>", { noremap = true })
 -- 映射 <leader>nh，取消当前高亮匹配的结果
-
 vim.keymap.set("n", "<leader>nh", ":lua no_highlight()<cr>", { noremap = true })
 -- 映射 <S-q> 关闭locallist quickfix
 vim.keymap.set("n", "<S-q>", "<Cmd>cclose | cexpr [] | lclose | lexpr []<CR>")
@@ -65,7 +64,7 @@ vim.keymap.set("n", "<leader>cpf", ":let @+ = expand('%:.')<CR>", { noremap = tr
 vim.keymap.set("n", "<leader>cpw", ":let @+ = expand('%:.').expand('::').expand('<cword>')<CR>", { noremap = true })
 -- 映射 <leader>cpl，将当前光标所在行复制到系统剪贴板中
 vim.keymap.set("n", "<leader>cpl", ":let @+ = expand('%:.').expand(':').line('.')<CR>", { noremap = true })
--- 该命令来自 Copilot 插件，用于实现智能编写代码的功能
+-- Copilot补全
 -- vim.keymap.set('i', '<C-l>', 'copilot#Accept(\'\\<CR>\')', { expr = true, silent = true, script = true })
 -- 刷新全部buffer
 vim.keymap.set("n", "<leader>be", ":bufdo e<CR>", { noremap = true })

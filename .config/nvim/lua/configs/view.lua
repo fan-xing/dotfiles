@@ -1,6 +1,11 @@
 require("catppuccin").setup {
   transparent_background = true,
-  flavour = "mocha", -- latte, frappe, macchiato, mocha
+  flavour = "auto", -- latte, frappe, macchiato, mocha
+  background = { -- :h background
+    light = "latte",
+    dark = "mocha",
+  },
+
   integrations = {
     notify = true,
   },
@@ -8,6 +13,11 @@ require("catppuccin").setup {
     transparent = true,
     solid = true,
   },
+  custom_highlights = function(C)
+    return {
+      CursorLine = { bg = C.surface1 },
+    }
+  end,
 }
 vim.cmd.colorscheme "catppuccin"
 
@@ -85,23 +95,6 @@ require("noice").setup {
   },
 }
 
---indent_blankline
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "tab:▎ "
-vim.opt.listchars:append "eol:↴"
--- require("ibl").setup {
---   scope = {
---     show_start = false,
---     show_end = false,
---   },
---   whitespace = {
---     remove_blankline_trail = false,
---   },
---   exclude = {
---     filetypes = { "dashboard" },
---   },
--- }
 require("nvim-web-devicons").setup {}
 
 require("lualine").setup {
@@ -115,7 +108,7 @@ require("lualine").setup {
     lualine_c = { "lsp_status", "diagnostics", "branch", "diff" },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress" },
-    lualine_z = { "selectioncount", "location" },
+    lualine_z = { "selectioncount", "location", "searchcount" },
   },
   tabline = {
     lualine_a = { "windows" },

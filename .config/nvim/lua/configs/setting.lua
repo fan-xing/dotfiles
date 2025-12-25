@@ -92,3 +92,9 @@ o.cursorlineopt = "both" -- to enable cursorline
 o.foldmethod = "indent"
 o.foldlevelstart = 1000
 o.undofile = true
+o.background = 'dark'
+local opt = vim.opt
+opt.list = true
+opt.listchars:append "space:⋅"
+opt.listchars:append "eol:↴"
+

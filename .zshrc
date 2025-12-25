@@ -112,6 +112,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+setopt no_auto_cd
+
 export TERM=xterm-256color
 # export FZF_DEFAULT_OPTS="--height 80% --reverse --border --preview-window=up --preview 'bat --style=numbers --color=always --line-range :500 {}' " 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -127,3 +129,11 @@ export EDITOR="nvim"
 export editor="nvim"
 export PATH="/opt/homebrew/bin:$PATH"
 export HOMEBREW_NO_AUTO_UPDATE=true
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH=$PYENV_ROOT/shims:$PATH
+eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
+export ENV="dev"
+export PATH="/usr/local/bin:$PATH"
+export dev_user="true"
+# export DEBUG="true"

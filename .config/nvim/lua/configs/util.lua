@@ -30,9 +30,14 @@ require("nvim-tree").setup {
   },
   filters = {
     dotfiles = true,
+    git_ignored = false,
   },
   modified = {
     enable = true,
+  },
+  renderer = {
+    highlight_git = "all",
+    highlight_modified = "all",
   },
 }
 local prev = { new_name = "", old_name = "" } -- Prevents duplicate events

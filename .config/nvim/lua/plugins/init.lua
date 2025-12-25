@@ -59,7 +59,6 @@ return {
       "nvim-treesitter/nvim-treesitter-context",
     },
   },
-  "akinsho/toggleterm.nvim",
   "akinsho/git-conflict.nvim",
   "lewis6991/gitsigns.nvim",
   "ggandor/leap.nvim",

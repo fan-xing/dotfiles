@@ -23,7 +23,6 @@ require("snacks").setup {
   scroll = { enabled = true },
   indent = { enabled = true },
   words = { enabled = true },
-  bigfile = { enabled = true },
   picker = {
     layout = layout,
     formatters = { file = { filename_first = true } },
