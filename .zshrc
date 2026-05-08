@@ -129,11 +129,18 @@ export EDITOR="nvim"
 export editor="nvim"
 export PATH="/opt/homebrew/bin:$PATH"
 export HOMEBREW_NO_AUTO_UPDATE=true
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH=$PYENV_ROOT/shims:$PATH
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH=$PYENV_ROOT/shims:$PATH
+# eval "$(pyenv init -)"
 export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
 export ENV="dev"
 export PATH="/usr/local/bin:$PATH"
-export dev_user="true"
+export dev_user="zhangboyang"
 # export DEBUG="true"
+export PATH="$HOME/.local/bin:$PATH"
+export NODE_EXTRA_CA_CERTS="$HOME/vpn-ca-bundle.crt"
+export CLAUDE_LOCALE=zh-CN
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

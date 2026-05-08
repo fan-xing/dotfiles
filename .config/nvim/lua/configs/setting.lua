@@ -96,5 +96,6 @@ o.background = 'dark'
 local opt = vim.opt
 opt.list = true
 opt.listchars:append "space:⋅"
+opt.listchars:append "tab:▎ "
 opt.listchars:append "eol:↴"
 

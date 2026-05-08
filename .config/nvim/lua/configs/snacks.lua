@@ -20,6 +20,7 @@ local layout = {
 }
 require("snacks").setup {
   dashboard = dashboard,
+  image = { enabled = true },
   scroll = { enabled = true },
   indent = { enabled = true },
   words = { enabled = true },

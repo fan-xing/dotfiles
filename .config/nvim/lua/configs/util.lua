@@ -83,7 +83,6 @@ require("Comment").setup {
   },
 }
 
-require("which-key").setup {}
 require("quicker").setup {}
 
 require("leetcode").setup {
@@ -93,9 +92,15 @@ require("leetcode").setup {
     translator = true, ---@type boolean
     translate_problems = true, ---@type boolean
   },
+  editor = {
+    reset_previous_code = false,
+  },
   injector = { ---@type table<lc.lang, lc.inject>
     ["golang"] = {
       before = { "package leetcode" },
     },
+  },
+  hooks = {
+    enter = { require("leetcode-plan.patch") },
   },
 }

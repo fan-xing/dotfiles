@@ -1,31 +1,67 @@
--- picker
-if has_plugin "snacks.nvim" then
-  vim.keymap.set("n", "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>")
-  vim.keymap.set("n", "<leader>fm", "<cmd>lua Snacks.picker.smart()<cr>")
-  vim.keymap.set("n", "<leader>rg", "<cmd>lua Snacks.picker.grep()<cr>")
-  vim.keymap.set("n", "<leader>fg", "<cmd>lua Snacks.picker.grep_word()<cr>")
-  vim.keymap.set("n", "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>")
-  vim.keymap.set("n", "<leader>fo", "<cmd>lua Snacks.picker.lsp_symbols()<cr>")
-  vim.keymap.set("n", "<F10>", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<cr>")
-  vim.keymap.set("n", "<leader>fr", "<cmd>lua Snacks.picker.lsp_references()<cr>")
-  vim.keymap.set("n", "<leader>fd", "<cmd>lua Snacks.picker.lsp_definitions()<cr>")
-  vim.keymap.set("n", "<leader>fi", "<cmd>lua Snacks.picker.lsp_implementations()<cr>")
-  vim.keymap.set("n", "<leader>ft", "<cmd>lua Snacks.picker.lsp_type_definitions()<cr>")
-  vim.keymap.set("n", "<leader>gs", "<cmd>lua Snacks.picker.git_status()<cr>")
-else
-  vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-  vim.keymap.set("n", "<leader>fm", "<cmd>Telescope oldfiles<cr>")
-  vim.keymap.set("n", "<leader>rg", "<cmd>Telescope live_grep<cr>")
-  vim.keymap.set("n", "<leader>fg", "<cmd>Telescope grep_string<cr>")
-  vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-  vim.keymap.set("n", "<leader>fo", "<cmd>Telescope lsp_document_symbols<cr>")
-  vim.keymap.set("n", "<F10>", "<cmd>Telescope lsp_dynamic_workspace_symbols <cr>")
-  vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>")
-  vim.keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_definitions<cr>")
-  vim.keymap.set("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>")
-  vim.keymap.set("n", "<leader>ft", "<cmd>Telescope lsp_type_definitions<CR>")
-  vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>")
+-- git workspace helpers
+local function find_repos(workspace, with_changes)
+  local handle = io.popen(string.format(
+    "find %s -maxdepth 2 -name '.git' -type d 2>/dev/null",
+    vim.fn.shellescape(workspace)
+  ))
+  local repos = {}
+  if handle then
+    for line in handle:lines() do
+      local repo = line:gsub("/.git$", "")
+      if with_changes then
+        local s = vim.fn.system(string.format("git -C %s status --porcelain 2>/dev/null", vim.fn.shellescape(repo)))
+        if vim.trim(s) ~= "" then table.insert(repos, repo) end
+      else
+        table.insert(repos, repo)
+      end
+    end
+    handle:close()
+  end
+  return repos
 end
+
+local function pick_repo(repos, callback)
+  if #repos == 0 then
+    vim.notify("No repos found", vim.log.levels.INFO)
+  elseif #repos == 1 then
+    callback(repos[1])
+  else
+    vim.ui.select(repos, { prompt = "Select repo:" }, function(choice)
+      if choice then callback(choice) end
+    end)
+  end
+end
+
+local function get_ws_root()
+  local cwd = vim.fn.getcwd()
+  return vim.fn.isdirectory(cwd .. "/.git") == 1 and cwd or nil
+end
+
+-- picker
+vim.keymap.set("n", "<leader>ff", "<cmd>lua Snacks.picker.files()<cr>")
+vim.keymap.set("n", "<leader>fm", "<cmd>lua Snacks.picker.smart()<cr>")
+vim.keymap.set("n", "<leader>rg", "<cmd>lua Snacks.picker.grep()<cr>")
+vim.keymap.set("n", "<leader>fg", "<cmd>lua Snacks.picker.grep_word()<cr>")
+vim.keymap.set("n", "<leader>fb", "<cmd>lua Snacks.picker.buffers()<cr>")
+vim.keymap.set("n", "<leader>fo", "<cmd>lua Snacks.picker.lsp_symbols()<cr>")
+vim.keymap.set("n", "<F10>", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<cr>")
+vim.keymap.set("n", "<F12>", "<cmd>lua Snacks.picker.diagnostics()<cr>")
+vim.keymap.set("n", "<leader>fr", "<cmd>lua Snacks.picker.lsp_references()<cr>")
+vim.keymap.set("n", "<leader>fd", "<cmd>lua Snacks.picker.lsp_definitions()<cr>")
+vim.keymap.set("n", "<leader>fi", "<cmd>lua Snacks.picker.lsp_implementations()<cr>")
+vim.keymap.set("n", "<leader>ft", "<cmd>lua Snacks.picker.lsp_type_definitions()<cr>")
+
+vim.keymap.set("n", "<leader>gs", function()
+  local function open(cwd)
+    Snacks.picker.git_status({ cwd = cwd })
+  end
+  local root = get_ws_root()
+  if root then
+    open(root)
+  else
+    pick_repo(find_repos(vim.fn.getcwd(), true), open)
+  end
+end)
 
 -- lsp
 vim.keymap.set("n", "<leader>fe", "<cmd>lua vim.diagnostic.setloclist()<cr>")
@@ -37,9 +73,22 @@ vim.keymap.set("n", "g?", vim.diagnostic.open_float)
 vim.keymap.set("n", "<F2>", "<Cmd>NvimTreeFindFileToggle<CR>")
 
 -- git
-vim.keymap.set("n", "<leader>gg", "<cmd>lua Snacks.lazygit()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gg", function()
+  local file_dir = vim.fn.expand("%:p:h")
+  local cwd = (file_dir ~= "" and vim.fn.isdirectory(file_dir) == 1) and file_dir or vim.fn.getcwd()
+  Snacks.lazygit({ cwd = cwd })
+end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>gf", "<cmd>lua Snacks.lazygit.log_file()<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>gl", "<cmd>lua Snacks.lazygit.log()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gl", function()
+  local root = get_ws_root()
+  if root then
+    Snacks.lazygit.log({ cwd = root })
+  else
+    pick_repo(find_repos(vim.fn.getcwd(), false), function(repo)
+      Snacks.lazygit.log({ cwd = repo })
+    end)
+  end
+end, { noremap = true, silent = true })
 
 -- custom cmd
 vim.keymap.set("n", "<C-h>", "<cmd>bp<cr>")
@@ -87,3 +136,14 @@ vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 
 -- terminal
 vim.keymap.set({"n","t"}, "<C-\\>", "<cmd>lua Snacks.terminal.toggle()<cr>")
+vim.keymap.set({"n","t"}, "<C-/>", function()
+  Snacks.terminal.toggle("claude", {
+    win = {
+      style = "terminal",
+      position = "bottom",
+      height = 0.4,
+      title = " Claude ",
+      title_pos = "center",
+    },
+  })
+end, { desc = "Toggle Claude terminal" })

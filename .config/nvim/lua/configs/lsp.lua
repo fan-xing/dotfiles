@@ -59,8 +59,6 @@ require("nvim-treesitter.configs").setup {
   indent = { enable = true },
 }
 
-require("treesitter-context").setup {}
-
 require("treesj").setup {
   max_join_length = 1000,
 }

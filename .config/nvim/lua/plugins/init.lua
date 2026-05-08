@@ -6,10 +6,6 @@ return {
   },
   "nvim-lua/plenary.nvim",
   "nvim-telescope/telescope.nvim",
-  {
-    "nvim-telescope/telescope-symbols.nvim",
-    lazy = false,
-  },
   "folke/noice.nvim",
   "rcarriga/nvim-notify",
   "muniftanjim/nui.nvim",
@@ -46,22 +42,14 @@ return {
     },
   },
   "danymat/neogen",
-  {
+  "nvim-tree/nvim-web-devicons",
     "nvim-tree/nvim-tree.lua",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      "nvim-treesitter/nvim-treesitter-context",
-    },
   },
   "akinsho/git-conflict.nvim",
   "lewis6991/gitsigns.nvim",
-  "ggandor/leap.nvim",
+  "https://codeberg.org/andyg/leap.nvim",
   "numtostr/comment.nvim",
   {
     "voldikss/vim-translator",
@@ -70,7 +58,6 @@ return {
   "windwp/nvim-autopairs",
   "stevearc/quicker.nvim",
   "wansmer/treesj",
-  "folke/which-key.nvim",
   {
     "sbdchd/neoformat",
     lazy = false,

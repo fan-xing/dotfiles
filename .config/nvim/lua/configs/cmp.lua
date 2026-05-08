@@ -62,7 +62,6 @@ cmp.setup {
     -- { name = "path" },
     { name = "buffer", group_index = 2 },
     { name = "nvim_lua" },
-    { name = "nvim_lsp_signature_help" },
   },
 }
 -- `/` cmdline setup.

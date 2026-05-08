@@ -97,6 +97,9 @@ require("noice").setup {
 
 require("nvim-web-devicons").setup {}
 
+local function get_git_root()
+  return " " .. vim.fs.basename(Snacks.git.get_root())
+end
 require("lualine").setup {
   options = {
     component_separators = { left = " ", right = " " },
@@ -104,8 +107,8 @@ require("lualine").setup {
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "filename" },
-    lualine_c = { "lsp_status", "diagnostics", "branch", "diff" },
+    lualine_b = { get_git_root},
+    lualine_c = { "branch", "lsp_status", "diagnostics", "diff" },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress" },
     lualine_z = { "selectioncount", "location", "searchcount" },
