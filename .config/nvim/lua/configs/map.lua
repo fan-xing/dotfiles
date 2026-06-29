@@ -1,16 +1,16 @@
 -- git workspace helpers
 local function find_repos(workspace, with_changes)
-  local handle = io.popen(string.format(
-    "find %s -maxdepth 2 -name '.git' -type d 2>/dev/null",
-    vim.fn.shellescape(workspace)
-  ))
+  local handle =
+    io.popen(string.format("find %s -maxdepth 2 -name '.git' -type d 2>/dev/null", vim.fn.shellescape(workspace)))
   local repos = {}
   if handle then
     for line in handle:lines() do
       local repo = line:gsub("/.git$", "")
       if with_changes then
         local s = vim.fn.system(string.format("git -C %s status --porcelain 2>/dev/null", vim.fn.shellescape(repo)))
-        if vim.trim(s) ~= "" then table.insert(repos, repo) end
+        if vim.trim(s) ~= "" then
+          table.insert(repos, repo)
+        end
       else
         table.insert(repos, repo)
       end
@@ -27,7 +27,9 @@ local function pick_repo(repos, callback)
     callback(repos[1])
   else
     vim.ui.select(repos, { prompt = "Select repo:" }, function(choice)
-      if choice then callback(choice) end
+      if choice then
+        callback(choice)
+      end
     end)
   end
 end
@@ -53,7 +55,7 @@ vim.keymap.set("n", "<leader>ft", "<cmd>lua Snacks.picker.lsp_type_definitions()
 
 vim.keymap.set("n", "<leader>gs", function()
   local function open(cwd)
-    Snacks.picker.git_status({ cwd = cwd })
+    Snacks.picker.git_status { cwd = cwd }
   end
   local root = get_ws_root()
   if root then
@@ -74,18 +76,18 @@ vim.keymap.set("n", "<F2>", "<Cmd>NvimTreeFindFileToggle<CR>")
 
 -- git
 vim.keymap.set("n", "<leader>gg", function()
-  local file_dir = vim.fn.expand("%:p:h")
+  local file_dir = vim.fn.expand "%:p:h"
   local cwd = (file_dir ~= "" and vim.fn.isdirectory(file_dir) == 1) and file_dir or vim.fn.getcwd()
-  Snacks.lazygit({ cwd = cwd })
+  Snacks.lazygit { cwd = cwd }
 end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>gf", "<cmd>lua Snacks.lazygit.log_file()<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>gl", function()
   local root = get_ws_root()
   if root then
-    Snacks.lazygit.log({ cwd = root })
+    Snacks.lazygit.log { cwd = root }
   else
     pick_repo(find_repos(vim.fn.getcwd(), false), function(repo)
-      Snacks.lazygit.log({ cwd = repo })
+      Snacks.lazygit.log { cwd = repo }
     end)
   end
 end, { noremap = true, silent = true })
@@ -135,15 +137,19 @@ vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
 vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 
 -- terminal
-vim.keymap.set({"n","t"}, "<C-\\>", "<cmd>lua Snacks.terminal.toggle()<cr>")
-vim.keymap.set({"n","t"}, "<C-/>", function()
-  Snacks.terminal.toggle("claude", {
+vim.keymap.set({ "n", "t" }, "<C-\\>", "<cmd>lua Snacks.terminal.toggle()<cr>")
+vim.keymap.set({ "n", "t" }, "<M-\\>", function()
+  Snacks.terminal.toggle("codex", {
     win = {
       style = "terminal",
       position = "bottom",
       height = 0.4,
-      title = " Claude ",
+      title = " Codex ",
       title_pos = "center",
     },
   })
-end, { desc = "Toggle Claude terminal" })
+end, { desc = "Toggle Codex terminal" })
+
+vim.keymap.set("n", "<leader>v", "<C-v>", {
+  desc = "Visual block mode",
+})

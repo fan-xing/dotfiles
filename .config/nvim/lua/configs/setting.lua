@@ -98,4 +98,3 @@ opt.list = true
 opt.listchars:append "space:⋅"
 opt.listchars:append "tab:▎ "
 opt.listchars:append "eol:↴"
-
