@@ -4,7 +4,7 @@ gui:
       - reverse
     selectedRangeBgColor:
       - reverse
-  erdFontsVersion: "2"
+  nerdFontsVersion: "3"
   showIcons: true
   border: 'double' # one of 'single' | 'double' | 'rounded' | 'hidden'
   language: 'zh-CN'
