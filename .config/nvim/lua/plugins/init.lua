@@ -43,9 +43,12 @@ return {
   },
   "danymat/neogen",
   "nvim-tree/nvim-web-devicons",
-    "nvim-tree/nvim-tree.lua",
+  "nvim-tree/nvim-tree.lua",
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
   },
   "akinsho/git-conflict.nvim",
   "lewis6991/gitsigns.nvim",

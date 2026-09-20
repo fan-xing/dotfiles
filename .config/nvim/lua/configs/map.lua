@@ -138,12 +138,16 @@ vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 
 -- terminal
 vim.keymap.set({ "n", "t" }, "<C-\\>", "<cmd>lua Snacks.terminal.toggle()<cr>")
+-- Codex 居中浮窗
 vim.keymap.set({ "n", "t" }, "<M-\\>", function()
   Snacks.terminal.toggle("codex", {
     win = {
       style = "terminal",
-      position = "bottom",
-      height = 0.4,
+      position = "float",
+      relative = "editor",
+      border = "rounded",
+      width = 0.85,
+      height = 0.85,
       title = " Codex ",
       title_pos = "center",
     },

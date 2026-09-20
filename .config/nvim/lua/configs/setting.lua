@@ -98,3 +98,7 @@ opt.list = true
 opt.listchars:append "space:⋅"
 opt.listchars:append "tab:▎ "
 opt.listchars:append "eol:↴"
+
+-- 对齐 WezTerm/WSL 下触控板水平滚动方向。
+vim.keymap.set({ "n", "i" }, "<ScrollWheelLeft>", "<C-\\><C-N>zl", { noremap = true, silent = true })
+vim.keymap.set({ "n", "i" }, "<ScrollWheelRight>", "<C-\\><C-N>zh", { noremap = true, silent = true })

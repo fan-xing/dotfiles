@@ -1,5 +1,6 @@
 -- go
 vim.cmd [[
+let g:go_gopls_enabled = 0
 let g:go_fmt_autosave = 0
 let g:go_imports_autosave = 0
 let g:go_mod_fmt_autosave = 0
@@ -53,11 +54,22 @@ vim.diagnostic.config {
   },
 }
 
-require("nvim-treesitter.configs").setup {
-  auto_install = true,
-  highlight = { enable = true },
-  indent = { enable = true },
+require("nvim-treesitter").setup {
+  install_dir = vim.fn.stdpath("data") .. "/site",
 }
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
+  callback = function(args)
+    local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+    if not lang or not vim.treesitter.language.add(lang) then
+      return
+    end
+
+    vim.treesitter.start(args.buf, lang)
+    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
 
 require("treesj").setup {
   max_join_length = 1000,
