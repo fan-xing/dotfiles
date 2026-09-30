@@ -5,6 +5,9 @@ set termguicolors
 "行号
 set nu
 
+" 固定标记列，避免 Git 标记刷新时左右跳动
+set signcolumn=yes
+
 "相对行号
 set relativenumber
 set sidescroll=1
